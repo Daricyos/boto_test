@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "astral-trees-328822",
+  "private_key_id": "b835e436df50c969b666c793900af5389d9fba9b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCnu0++dSigdLwc\nU2JOCjelPwWfpJdL4jjYlpMq9FdGe4fo260T+KvuNVX6njW5fjG7O4hsDSkQTdN3\nqo2CHSK9Uh7+FCc6AU96KykuosqWiOYErvsUGhVTJBZ5ZskULBoIfpq9+5S4vRh4\ns6Az7c12pKM5X47Zg4XZtuEP3S5ZoCVhhGhJ5Sclr2QFBxxcWLG0PLtHkjXpGE7d\ndP1TLhlPu1flfO6jQef4j9QdCTCbvRwsghpG9HOpMLhWPykyVnOcJ67SYDXu/YzC\nsBhpYxPMWvvYwRFzsCQ/mcJF208Q21D6xqrHSxcL53qNW2eNqirKeUVEqEsiQJ36\nv/IVNG95AgMBAAECggEAIFQOdSeQqoiFXzJFHsSCYCOq+k+XZ6VVDo3LFLrefXO+\nyMdabyB9Rt7Z0QGgWj2z6SH609SfhwhxCz4Ao0TpVrMWzSLmQpxRDLt35wiyYlxF\ndT6inwe993XbrQ9+DxjG9b8tJRPx4L91kYIRjSC2+riVyy+bUVozuLgyXcPkNJrE\n6IfMa/DrBIRKsoHMsWF0w9vqlvBbqfjh9tdDSa3AiDJ7belFoPmZWJ5Jr7+plekV\nn412oogvu1FtuvTDQNIFIn3csd+NGi/NdHghH6d+QVi7Np/TLAhTK3yks1LpjG/o\n7Ubfc3VQwKm54ZMf8H6Ry5JY/az+fszL10Et8cpHpwKBgQDP7+E1VOLwE6AuFAMr\npxat8W3z4W2TxlcCA+UcVfxUgwAjZA7xa2S4UcUIky4iKXXVcrFuuqhnm5t70ELJ\nOwsKI3Iqtb7t0Km42V47xKBF4eZVubUfxIee1thOHY81sYQhzHqW1+XGqkfWt8a9\npD29tOpP8CO7a0Cwl68sonJw7wKBgQDOgGM1JrIpgNTZH6Y7keZA+wYt4YdFDccr\nMTtIXGrI/GDSoRepc1epeIfOoOG/cekBLXSnsotLXc5JVZbAv5X0RLbzg303qsnU\nDDpE+z9Dut6XpMGMfriAoUsu3awyWrNHhHnDxfR0Pm5E6J8KP2KM4URn2OFrnRz0\n5RECrMRWFwKBgQC27pp6iMt92kY5Q3HmnYDeVmAdBl2YfA1fwH13iE4NK5KbkBN1\nYL2jSozFFnanp0H7HoPqnlw5ijQnoPiggEkeCkEOQgZOwhwOe2zjuAAoeqxhDpfB\n8uw9WVXCo06yNhHAilvvCNElDflVdShq/msy0k6xNNq6r4ih01BRPDjiEQKBgBaa\ny0FYOQx+A864vjOrJu9aCzUeiPYwKes6emjTZQUXS2oDJFnyPFhaz1L5HX0ddQoh\n9bEdxE29uQUiD1yOHFYe54AElsJvOaSyqfY/Io/BdvhWmrFMddnuzhIVRfJFJ3be\ns42Qr8/BvcRhSneOtLUDO7+6aAKlsjPEl3YZf2yFAoGAYes3CZe84UYLOLSNS+er\no8ZHYx+sUKCO7dfW//zOnLbuc/iqiVMlJJKkJzM9jCc2SdS2lMjrds9izgWChkb2\nm1fkpmVCbLVmlNtd/B9c46wkXyJgunLRC7MIJEQ9SKsIYPGVk+sO3d3XVvsC8vOi\njwcZSRDe9xRsAwyyGsee2jk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "daricyos2@astral-trees-328822.iam.gserviceaccount.com",
+  "client_id": "110655379482737878743",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/daricyos2%40astral-trees-328822.iam.gserviceaccount.com"
+}
