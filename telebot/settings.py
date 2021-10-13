@@ -30,7 +30,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
