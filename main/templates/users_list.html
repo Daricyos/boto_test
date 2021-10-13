@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>All Users</title>
+    {{ block.super }}
+{% endblock %}
+{% block content %}
+    <table>
+        <th>ID</th>
+        <th>Telegram ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Phone number</th>
+        {% for users in users_list %}
+            <tr>
+                <td>{{ users.id|safe }}</td>
+                <td>{{users.tele_id|safe }}</td>
+                <td>{{ users.first_name|safe }}</td>
+                <td>{{ users.last_name|safe }}</td>
+                <td>{{ users.phone|safe }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

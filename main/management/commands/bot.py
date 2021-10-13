@@ -30,11 +30,12 @@ service = apiclient.discovery.build('sheets', 'v4', http=httpAuth)
 
 values = service.spreadsheets().values().get(
     spreadsheetId=spreadsheet_id,
-    range='A1:G17',
+    range='A1:G',
 ).execute()
 value = values.get('values', [])
 
-dir = r"/home/maksym/Doc/Git/test_bot/telebot"
+
+dir = os.path.abspath(os.curdir)
 if not os.path.exists(dir):
     os.mkdir(dir)
 
@@ -47,7 +48,7 @@ with open(os.path.join(dir, "filename" + '.csv'), "w") as f:
         f.writelines(al)
 
 
-FirstName, LastName, Phone, Gallery = range(4)
+FirstName, LastName, YEARS, Phone, Gallery = range(5)
 
 reply_keyboard = [['Каталог']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
@@ -84,7 +85,7 @@ def first_name(update, context):
             tele_id=chat_id,
             defaults={'first_name': firstname},
         )
-        update.message.reply_text('Ваша Фамилия?')
+        update.message.reply_text('Ваша фамилия?')
         return LastName
     except: # noqa
         update.message.reply_text('Что-то не так, попробуй ещё раз ввести имя.')
@@ -99,20 +100,33 @@ def last_name(update, context):
             tele_id=chat_id,
             defaults={'last_name': lastname}
         )
-        update.message.reply_text('Ваш Телефон?')
-        return Phone
+        update.message.reply_text('Сколько Вам лет?')
+        return YEARS
     except: # noqa
         update.message.reply_text('Что-то не так, попробуй ещё раз ввести фамилию.')
         return LastName
 
-
-def phone(update, context):
-    phin = update.message.text
+def age(update, context):
+    year = update.message.text
     chat_id = update.message.chat_id
     try:
         obj, created = Users.objects.update_or_create(
             tele_id=chat_id,
-            defaults={'phone': phin}
+            defaults={'age': year}
+        )
+        update.message.reply_text('Ваш Телефон?')
+        return Phone
+    except: # noqa
+        update.message.reply_text('Что-то не так,попробуй ещё раз ввести возраст.')
+        return YEARS
+
+def phone(update, context):
+    mob = update.message.text
+    chat_id = update.message.chat_id
+    try:
+        obj, created = Users.objects.update_or_create(
+            tele_id=chat_id,
+            defaults={'phone': mob}
         )
         update.message.reply_text('Отлично, ты прошёл регистрацию!', reply_markup=markup)
         return Gallery
@@ -164,11 +178,12 @@ class Command(BaseCommand):
             states={
                 FirstName: [MessageHandler(Filters.text, first_name)],
                 LastName: [MessageHandler(Filters.text, last_name)],
+                YEARS: [MessageHandler(Filters.text, age)],
                 Phone: [MessageHandler(Filters.text, phone)],
                 Gallery: [MessageHandler(Filters.regex('^Каталог$'), gallery)]
             },
 
-            fallbacks=[CommandHandler('cancel', cancel)]
+            fallbacks=[CommandHandler("cancel", cancel)]
         )
 
         dispatcher.add_handler(conv_handler)

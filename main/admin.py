@@ -5,8 +5,8 @@ from .models import Users, Product
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ("tele_id", "first_name", "last_name", "phone")
-    list_filter = ("first_name", "last_name")
+    list_display = ("tele_id", "first_name", "last_name", "age", "phone")
+    list_filter = ("first_name", "last_name", "age")
     search_fields = ("last_name__startswith", "first_name__startswith")
 
 
