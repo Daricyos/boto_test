@@ -1,4 +1,6 @@
+from typing import Text
 from django.core.management.base import BaseCommand
+from django.core import serializers
 from telegram import Bot, ReplyKeyboardMarkup
 from telegram.ext import CommandHandler, ConversationHandler
 from telegram.ext import Filters
@@ -15,9 +17,9 @@ from io import StringIO
 import apiclient.discovery
 from oauth2client.service_account import ServiceAccountCredentials
 
-from main.models import Users, Product
+from main.models import Users, Product, TxT
 
-
+#Google Sheets
 CREDENTIALS_FILE = 'creds.json'
 spreadsheet_id = '1-1_yVsyktQXCOXk2rSEDWUe2tUeVXcg5G2EgeE-RjY0'
 
@@ -47,12 +49,14 @@ with open(os.path.join(dir, "filename" + '.csv'), "w") as f:
     for al in csvfile.getvalue():
         f.writelines(al)
 
-
+#BOT
+bot = telegram.Bot(token=settings.TOKEN)
+posts = Product.objects.all()
+bot_t = TxT.objects.all().values('text')
 FirstName, LastName, YEARS, Phone, Gallery = range(5)
 
-reply_keyboard = [['Каталог']]
-markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
-bot = telegram.Bot(token=settings.TOKEN)
+reply_keyboard = [[bot_t[0]['text'], bot_t[1]['text']]]
+markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True)
 
 
 def start(update, context):
@@ -72,9 +76,9 @@ def start(update, context):
             user.save()
             count += 1
     print(count)
-    update.message.reply_text('Ваше имя?')
+    update.message.reply_text(bot_t[2]['text'])
 
-    return FirstName
+    return FirstName    
 
 
 def first_name(update, context):
@@ -85,10 +89,10 @@ def first_name(update, context):
             tele_id=chat_id,
             defaults={'first_name': firstname},
         )
-        update.message.reply_text('Ваша фамилия?')
+        update.message.reply_text(bot_t[3]['text'])
         return LastName
     except: # noqa
-        update.message.reply_text('Что-то не так, попробуй ещё раз ввести имя.')
+        update.message.reply_text(bot_t[7]['text'])
         return FirstName
 
 
@@ -100,10 +104,10 @@ def last_name(update, context):
             tele_id=chat_id,
             defaults={'last_name': lastname}
         )
-        update.message.reply_text('Сколько Вам лет?')
+        update.message.reply_text(bot_t[4]['text'])
         return YEARS
     except: # noqa
-        update.message.reply_text('Что-то не так, попробуй ещё раз ввести фамилию.')
+        update.message.reply_text(bot_t[8]['text'])
         return LastName
 
 def age(update, context):
@@ -114,10 +118,10 @@ def age(update, context):
             tele_id=chat_id,
             defaults={'age': year}
         )
-        update.message.reply_text('Ваш Телефон?')
+        update.message.reply_text(bot_t[5]['text'])
         return Phone
     except: # noqa
-        update.message.reply_text('Что-то не так,попробуй ещё раз ввести возраст.')
+        update.message.reply_text(bot_t[9]['text'])
         return YEARS
 
 def phone(update, context):
@@ -128,27 +132,23 @@ def phone(update, context):
             tele_id=chat_id,
             defaults={'phone': mob}
         )
-        update.message.reply_text('Отлично, ты прошёл регистрацию!', reply_markup=markup)
+        update.message.reply_text(bot_t[6]['text'], reply_markup=markup)
         return Gallery
     except: # noqa
-        update.message.reply_text('Что-то не так, попробуй ещё раз ввести телефон.')
+        update.message.reply_text(bot_t[10]['text'])
         return Phone
 
 
 def gallery(update, context):
     chat_id = update.message.chat_id
-    posts = Product.objects.all()
 
     for post in posts:
         bot.send_photo(chat_id=chat_id, photo=post.img)
-        update.message.reply_text(f'Название: {post.name}\nОписание: {post.desc}\nЦена: {post.price}')
-
-    return ConversationHandler.END
+        update.message.reply_text(f'{bot_t[11]["text"]} {post.name}\n{bot_t[12]["text"]} {post.desc}\n{bot_t[13]["text"]} {post.price}')
 
 
 def cancel(update, context):
-    update.message.reply_text(
-        'Пока, было приятно пообщаться')
+    update.message.reply_text(bot_t[14]["text"])
 
     return ConversationHandler.END
 
@@ -158,8 +158,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         request = Request(
-            connect_timeout=1,
-            read_timeout=2.0,
+            connect_timeout=2,
+            read_timeout=4,
         )
         bot = Bot(
             request=request,
@@ -180,10 +180,12 @@ class Command(BaseCommand):
                 LastName: [MessageHandler(Filters.text, last_name)],
                 YEARS: [MessageHandler(Filters.text, age)],
                 Phone: [MessageHandler(Filters.text, phone)],
-                Gallery: [MessageHandler(Filters.regex('^Каталог$'), gallery)]
+                Gallery: [MessageHandler(Filters.regex(f'^{bot_t[0]["text"]}$'), gallery),
+                            MessageHandler(Filters.regex(f'^{bot_t[1]["text"]}$'), start)]
             },
 
-            fallbacks=[CommandHandler("cancel", cancel)]
+            fallbacks=[CommandHandler("cancel", cancel),
+                        CommandHandler('start', start)]
         )
 
         dispatcher.add_handler(conv_handler)

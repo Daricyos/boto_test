@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Users, Product
+from .models import Users, Product, TxT
 
 
 @admin.register(Users)
@@ -13,3 +13,9 @@ class UsersAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "qty", "desc", "price", "img", "availability")
+
+
+@admin.register(TxT)
+class TxTAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "text")
+    search_fields = ("name__startswith", "text__startswith")

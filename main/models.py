@@ -22,3 +22,11 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.id}, {self.name}, {self.qty}, {self.desc}, {self.price}, {self.img}, {self.availability}"
+
+
+class TxT(models.Model):
+    name = models.CharField('Description', max_length=200, db_column='Description')
+    text = models.CharField('Text', max_length=200, db_column='Text')
+
+    def __str__(self):
+        return f"{self.id}, {self.name}, {self.text}"
