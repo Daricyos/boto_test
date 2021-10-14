@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <title>Hillel Django Project</title>
+        <style type="text/css">
+            body {
+                font-family: Geneva, Arial, Helvetica, sans-serif;
+            }
+        </style>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+<body>
+    <aside>
+        <h3>Navigation</h3>
+        <ul>
+            <a href="/admin"><li>Admin</li></a>
+        </ul>
+    </aside>
+    <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div id="content">{% block content %}{% endblock %}</div>
+    </main>
+</body>
+</html>

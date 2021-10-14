@@ -80,7 +80,6 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-config.py
 
 # pyenv
 .python-version
@@ -103,7 +102,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-*.csv
 .env
 .venv
 env/
@@ -126,8 +124,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-creds.json
-.~lock.filename.csv#
 
 # Pyre type checker
 .pyre/
+/staticfiles
