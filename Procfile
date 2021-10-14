@@ -1,2 +1,2 @@
 web: gunicorn telebot.wsgi
-web: python3 manage.py bot
+worker: python3 manage.py bot
