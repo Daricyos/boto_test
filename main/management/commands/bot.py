@@ -53,7 +53,6 @@ with open(os.path.join(dir, "filename" + '.csv'), "w") as f:
 bot = telegram.Bot(token=settings.TOKEN)
 posts = Product.objects.all()
 bot_t = TxT.objects.all().values('text')
-bot_t.sort()
 FirstName, LastName, YEARS, Phone, Gallery = range(5)
 
 reply_keyboard = [[bot_t[0]['text'], bot_t[1]['text']]]
